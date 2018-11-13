@@ -116,15 +116,23 @@ public class SwiftSpeechRecognitionPlugin: NSObject, FlutterPlugin, SFSpeechReco
       fatalError("Audio engine has no input node")
     }
     
-    guard let recognitionRequest = recognitionRequest else {
-      fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")
-    }
+    self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
-    recognitionRequest.shouldReportPartialResults = true
+    let inputNode = audioEngine.inputNode
+//    else {
+//      fatalError("Audio engine has no input node")
+//    }
+    
+     let recognitionRequest = self.recognitionRequest
+//    else {
+//      fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")
+//    }
+
+    recognitionRequest!.shouldReportPartialResults = true
 
     let speechRecognizer = getRecognizer(lang: lang)
 
-    recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+    recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest ?? SFSpeechAudioBufferRecognitionRequest()) { result, error in
       var isFinal = false
 
       if let result = result {
