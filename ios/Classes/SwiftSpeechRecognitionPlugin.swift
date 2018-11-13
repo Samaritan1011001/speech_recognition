@@ -112,11 +112,11 @@ public class SwiftSpeechRecognitionPlugin: NSObject, FlutterPlugin, SFSpeechReco
 
     recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
-     let inputNode = audioEngine.inputNode else {
+     guard let inputNode = audioEngine.inputNode else {
       fatalError("Audio engine has no input node")
     }
     
-    let recognitionRequest = recognitionRequest else {
+    guard let recognitionRequest = recognitionRequest else {
       fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")
     }
 
