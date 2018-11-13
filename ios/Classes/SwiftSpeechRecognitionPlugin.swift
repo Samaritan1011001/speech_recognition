@@ -110,11 +110,6 @@ public class SwiftSpeechRecognitionPlugin: NSObject, FlutterPlugin, SFSpeechReco
     try audioSession.setMode(AVAudioSessionModeMeasurement)
     try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
 
-    recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-
-     guard let inputNode = audioEngine.inputNode else {
-      fatalError("Audio engine has no input node")
-    }
     
     self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
